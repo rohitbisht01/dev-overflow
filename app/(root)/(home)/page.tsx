@@ -1,12 +1,15 @@
+import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilters from "@/components/home/HomeFilter";
 import Filter from "@/components/shared/Filters";
+import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 
 export default async function Home() {
-  // const result = await getQuestions({});
+  const result = await getQuestions({});
 
   return (
     <>
@@ -36,7 +39,7 @@ export default async function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {/* {result.questions.length > 0 ? (
+        {result.questions.length > 0 ? (
           result.questions.map((question) => (
             <QuestionCard
               key={question._id}
@@ -57,7 +60,7 @@ export default async function Home() {
             link="/ask-question"
             linkTitle="Ask a Question"
           />
-        )} */}
+        )}
       </div>
     </>
   );
