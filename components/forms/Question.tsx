@@ -21,6 +21,7 @@ import { createQuestion } from "@/lib/actions/question.action";
 import { useRouter, usePathname } from "next/navigation";
 import { QuestionsSchema } from "@/lib/validation";
 import { useForm } from "react-hook-form";
+import { useTheme } from "@/context/ThemeProvider";
 
 const type: any = "create";
 
@@ -29,6 +30,7 @@ interface QuestionProps {
 }
 
 const Question = ({ mongoUserId }: QuestionProps) => {
+  const { mode } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -181,6 +183,8 @@ const Question = ({ mongoUserId }: QuestionProps) => {
                       "removeformat | help",
                     content_style:
                       "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
+                    skin: mode === "dark" ? "oxide-dark" : "oxide",
+                    content_css: mode === "dark" ? "dark" : "light",
                   }}
                 />
               </FormControl>

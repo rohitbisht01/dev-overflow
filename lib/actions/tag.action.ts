@@ -1,6 +1,6 @@
 "use server";
 
-// import User from "@/database/user.model";
+import User from "@/database/user.model";
 import { connectToDatabase } from "../mongoose";
 import { GetAllTagsParams, GetTopInteractedTagsParams } from "./shared.types";
 import Tag from "@/database/tag.model";
@@ -9,10 +9,10 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
     connectToDatabase();
 
-    // const { userId, limit = 3 } = params;
-    // const user = await User.findById(userId);
+    const { userId, limit = 3 } = params;
+    const user = await User.findById(userId);
 
-    // if (!user) throw new Error("User not found");
+    if (!user) throw new Error("User not found");
 
     // Find interactions for the user and groups by tags
     // Interaction  model
