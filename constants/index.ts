@@ -3,7 +3,6 @@ import { SidebarLink } from "@/types";
 export const themes = [
   { value: "light", label: "Light", icon: "/icons/sun.svg" },
   { value: "dark", label: "Dark", icon: "/icons/moon.svg" },
-  { value: "system", label: "System", icon: "/icons/computer.svg" },
 ];
 
 export const sidebarLinks: SidebarLink[] = [
@@ -21,11 +20,6 @@ export const sidebarLinks: SidebarLink[] = [
     imgURL: "/icons/star.svg",
     route: "/collection",
     label: "Collections",
-  },
-  {
-    imgURL: "/icons/suitcase.svg",
-    route: "/jobs",
-    label: "Find Jobs",
   },
   {
     imgURL: "/icons/tag.svg",
