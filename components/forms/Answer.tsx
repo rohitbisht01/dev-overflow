@@ -28,6 +28,7 @@ interface AnswerProp {
 const Answer = ({ question, questionId, authorId }: AnswerProp) => {
   const pathname = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmittingAI, setIsSubmittingAI] = useState(false);
   const { mode } = useTheme();
   const editorRef = useRef(null);
 
@@ -63,6 +64,33 @@ const Answer = ({ question, questionId, authorId }: AnswerProp) => {
     }
   };
 
+  const generateAIAnswer = async () => {
+    if (!authorId) return;
+
+    setIsSubmittingAI(true);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`,
+        {
+          method: "POST",
+          body: JSON.stringify({ question }),
+        }
+      );
+
+      const responseData = await response.json();
+
+      if (responseData.error) {
+        console.error("OpenAI API error:", responseData.error);
+      } else {
+        alert(responseData.reply);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmittingAI(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-start sm:gap-5">
@@ -72,7 +100,8 @@ const Answer = ({ question, questionId, authorId }: AnswerProp) => {
 
         <Button
           className="btn light-border-2 gap-1.5 rounded-md px-4 py-2.5  text-primary-500 shadow-none dark:text-primary-500"
-          onClick={() => {}}
+          onClick={generateAIAnswer}
+          disabled={isSubmittingAI}
         >
           <Image
             src="/icons/star.svg"
@@ -81,7 +110,7 @@ const Answer = ({ question, questionId, authorId }: AnswerProp) => {
             height={12}
             className="object-contain"
           />
-          Generate an AI Answer
+          {isSubmittingAI ? "Submitting..." : "Generate AI Answer"}
         </Button>
       </div>
       <Form {...form}>
