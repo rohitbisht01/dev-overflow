@@ -10,7 +10,7 @@
   
 - **Authentication Integration:** Implemented secure user authentication using Clerk, ensuring data privacy and access control.
 
-- **OpenAPI Integration:** Leverage OpenAPI to dynamically generate answers based on user queries.
+- **OpenAI Integration:** Leverage OpenAPI to dynamically generate answers based on user queries.
 
 - **Webhook Integration:** Utilize Clerk webhooks to synchronize user data between Clerk and MongoDB, ensuring a consistent and up-to-date user experience.
 
@@ -25,3 +25,4 @@
 - [MongoDB](https://www.mongodb.com/): A robust and scalable database solution for storing and managing application data.
 
 
+### NOTE:  The OpenAI answer feature is currently unavailable due to a problem with the OpenAPI
